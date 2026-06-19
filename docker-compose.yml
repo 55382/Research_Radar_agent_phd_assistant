@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  research-radar:
+    platform: linux/amd64   # ← add this line
+    build: .
+    env_file: .env
+    volumes:
+      - ./logs:/app/logs        # logs persist on your machine
+      - ./data:/app/data        # ground truth CSV persists
+    restart: "no"               # run once, don't loop
