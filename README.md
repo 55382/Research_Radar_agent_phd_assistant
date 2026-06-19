@@ -36,8 +36,8 @@ ArXiv API → Agent 1 (Fetch) → Agent 2 (RAG Rank) → Agent 3 (Email) + Monit
 | File | Role |
 |---|---|
 | `src/agent_arxiv.py` | Fetches today's papers from ArXiv |
-| `src/agent_ranker.py` | Two-stage RAG ranker (semantic + LLM rerank) |
-| `src/agent_digest.py` | Formats and sends HTML email via Resend |
+| `src/rag_ranker.py` | Two-stage RAG ranker (semantic + LLM rerank) |
+| `src/digest_sender.py` | Formats and sends HTML email via Resend |
 | `src/feedback_server.py` | FastAPI webhook — receives star ratings from emails |
 | `src/monitor.py` | Logs every run to `logs/runs.jsonl` |
 | `pipeline.py` | Wires all agents together |
@@ -94,7 +94,7 @@ Run evaluation:
 ```bash
 uv run python -c "
 import sys; sys.path.insert(0, '.')
-from src.agent_ranker import RAGRanker
+from src.rag_ranker import RAGRanker
 r = RAGRanker()
 r.build_interest_profile()
 r.evaluate(top_k=5)
@@ -269,7 +269,7 @@ Run evaluation:
 ```bash
 uv run python -c "
 import sys; sys.path.insert(0, '.')
-from src.agent_ranker import RAGRanker
+from src.rag_ranker import RAGRanker
 r = RAGRanker()
 r.build_interest_profile()
 results = r.evaluate(top_k=5)
@@ -342,8 +342,8 @@ automatically.
 research_radar/
 ├── src/
 │   ├── agent_arxiv.py       # Agent 1: ArXiv fetcher
-│   ├── agent_ranker.py      # Agent 2: Two-stage RAG ranker
-│   ├── agent_digest.py      # Agent 3: Email digest sender
+│   ├── rag_ranker.py        # Agent 2: Two-stage RAG ranker
+│   ├── digest_sender.py     # Agent 3: Email digest sender
 │   ├── feedback_server.py   # FastAPI feedback webhook
 │   └── monitor.py           # Run logger
 ├── tests/
