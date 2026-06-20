@@ -12,6 +12,7 @@ Researchers publishing in fast-moving fields like LLMs, agents, and multimodal A
 face a daily flood of ArXiv papers — often 100–300 new submissions per day in a
 single category. Manually scanning titles and abstracts wastes hours and still
 misses relevant work.
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/cce0476b-0bd0-4955-ab3a-adfcd1b93b87" />
 
 **Research Radar solves this by:**
 1. Fetching every new paper from your chosen ArXiv categories each morning
@@ -20,6 +21,7 @@ misses relevant work.
 3. Emailing you a digest of only the top matches — with relevance scores and
    explanations — so you read what matters and skip the rest
 4. Learning from your in-email star ratings to improve rankings over time
+<img width="950" height="410" alt="image" src="https://github.com/user-attachments/assets/44fb08f6-d063-4f98-8267-a6eaee368a0e" />
 
 ---
 
