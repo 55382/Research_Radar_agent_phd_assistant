@@ -45,6 +45,18 @@ ArXiv API → Agent 1 (Fetch) → Agent 2 (RAG Rank) → Agent 3 (Email) + Monit
 
 ---
 
+## Agent Tools
+
+| Agent | Tools Used |
+|---|---|
+| Agent 1 (Fetch) | ArXiv API, HTTP requests |
+| Agent 2 (RAG Rank) | `sentence-transformers`, semantic embeddings, OpenAI-compatible LLM |
+| Agent 3 (Email) | Resend API, HTML email formatting |
+| Feedback Server | FastAPI webhook, CSV read/write, profile rebuilder |
+| Dashboard | Live UI, JSONL run logs, monitoring charts |
+
+---
+
 ## Knowledge Base & Retrieval
 
 ### Knowledge base
@@ -175,6 +187,12 @@ docker compose up
 
 ---
 
+## Cloud Deployment
+
+This project is Docker-ready and can be deployed to cloud providers such as Railway, Render, or any Docker-compatible host. Use `docker compose up` locally, then deploy the same `Dockerfile` and `docker-compose.yml` to run the pipeline, feedback server, and dashboard together.
+
+---
+
 ## Environment Variables
 
 | Variable | Required | Description |
@@ -194,6 +212,10 @@ Free compatible providers: Groq works out of the box. Set
 ---
 
 ## Testing
+
+### GitHub Actions CI
+
+A GitHub Actions workflow runs `uv run pytest tests/ -v` on every push and pull request.
 
 ### Run all unit tests
 
@@ -298,7 +320,9 @@ To view rating stats: `http://localhost:8000/stats`
 
 ---
 
-## Monitoring
+## UI Dashboard & Monitoring
+
+Research Radar includes a live dashboard UI for monitoring pipeline runs, relevance trends, and saved ratings.
 
 Every pipeline run is logged to `logs/runs.jsonl`. Each line is a JSON event:
 
