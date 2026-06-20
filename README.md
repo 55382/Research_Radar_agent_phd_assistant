@@ -337,6 +337,9 @@ Every pipeline run is logged to `logs/runs.jsonl`. Each line is a JSON event:
 uv run python dashboard.py
 # → http://localhost:5000
 ```
+<img width="938" height="442" alt="image" src="https://github.com/user-attachments/assets/60fe878b-9a09-4942-9a78-479a55e80294" />
+<img width="907" height="424" alt="image" src="https://github.com/user-attachments/assets/e9939ade-1fbc-4dde-9838-aebf759693be" />
+
 
 The dashboard shows:
 - Total runs, papers ranked, average relevance score, errors
