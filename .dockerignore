@@ -1,4 +1,5 @@
 .venv
+virtualenv
 .env
 logs/
 data/
