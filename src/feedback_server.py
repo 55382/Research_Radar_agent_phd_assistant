@@ -18,7 +18,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 app = FastAPI(title="Research Radar Feedback")
 
 FEEDBACK_CSV = os.environ.get("FEEDBACK_CSV", "data/ground_truth_papers.csv")
-FIELDNAMES   = ["arxiv_id", "title", "abstract", "your_rating", "why_you_care"]
+FIELDNAMES = ["arxiv_id", "title", "abstract", "your_rating", "why_you_care", "updated_at"]
 
 RATING_META = {
     1: ("1★",      "Not relevant",      "#e05c5c"),
@@ -61,6 +61,7 @@ def _upsert(arxiv_id: str, title: str, abstract: str,
         if row.get("arxiv_id", "").strip() == arxiv_id.strip():
             row["your_rating"]  = your_rating
             row["why_you_care"] = why_you_care or row.get("why_you_care", "")
+            row["updated_at"]   = datetime.datetime.utcnow().isoformat()
             if not row.get("abstract") and abstract:
                 row["abstract"] = abstract
             found = True
@@ -73,6 +74,7 @@ def _upsert(arxiv_id: str, title: str, abstract: str,
             "abstract":    abstract,
             "your_rating": your_rating,
             "why_you_care": why_you_care,
+            "updated_at":  datetime.datetime.utcnow().isoformat()
         })
 
     _write_rows(rows)
