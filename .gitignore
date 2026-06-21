@@ -9,7 +9,8 @@ virtualenv/
 .dist/
 
 
-
+build.log
+.env
 
 
 
