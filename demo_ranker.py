@@ -9,7 +9,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 
-from agent_ranker import RAGRanker
+from src.rag_ranker import RAGRanker
 
 
 NEW_PAPERS = [

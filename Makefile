@@ -28,7 +28,7 @@ judge:
 eval:
 	uv run python -c "\
 import sys; sys.path.insert(0, '.'); \
-from src.agent_ranker import RAGRanker; \
+from src.rag_ranker import RAGRanker; \
 r = RAGRanker(); \
 r.build_interest_profile(); \
 r.evaluate(top_k=5)"

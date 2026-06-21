@@ -97,11 +97,27 @@ your daily digests.
 
 ### Retrieval evaluation
 
-The ranker is evaluated with Precision@K, Recall@K, and NDCG@K against
-`ground_truth_papers.csv`. We used this evaluation to tune:
-- The semantic/LLM score blend weights (0.6 / 0.4)
-- The Stage 1 candidate pool size (`top_k × 2`)
-- The minimum rating threshold for profile building (`min_rating=3`)
+Research Radar evaluates ranking quality using held-out relevance from
+`data/ground_truth_papers.csv`. This file acts as the ground truth for papers
+you have rated, so the evaluation measures how well the model puts your
+highly-rated papers near the top.
+
+**Metrics explained**
+
+| Metric | What it measures | Good value means |
+|---|---|---|
+| `Precision@K` | Of the top `K` recommended papers, what fraction are in your high-relevance ground truth set? | Higher is better; `1.0` means all top-K papers are relevant |
+| `Recall@K` | Of all relevant ground truth papers, what fraction appear in the top `K` recommendations? | Higher is better; `1.0` means the model found every relevant paper |
+| `NDCG@K` | Rank-sensitive quality score for the top `K` results, weighting higher positions more strongly | Higher is better; `1.0` is perfect ordering, values above `0.7` are typically strong for noisy relevance data |
+
+This evaluation is especially useful because it directly compares system output
+against the papers you have already rated rather than only relying on absolute
+score numbers.
+
+We used evaluation to tune key parameters:
+- semantic / LLM score blend weights (`0.6 / 0.4`)
+- Stage 1 candidate pool size (`top_k × 2`)
+- minimum rating threshold for profile building (`min_rating=3`)
 
 Run evaluation:
 
@@ -115,10 +131,21 @@ r.evaluate(top_k=5)
 "
 ```
 
-Expected output:
+Example output on the current dataset:
 ```
 📈 Results -> Precision@5: 0.800 | Recall@5: 0.667 | NDCG@5: 0.923
 ```
+
+**Interpretation of this example**
+- `Precision@5: 0.800` means 4 of the top 5 recommended papers matched your
+  high-relevance ground truth papers.
+- `Recall@5: 0.667` means the top 5 recommendations captured roughly two-thirds
+  of the relevant papers from the ground truth set.
+- `NDCG@5: 0.923` means the recommendations are not only relevant, but also
+  well-ordered, with the most relevant papers ranked near the top.
+
+> Note: actual evaluation scores change as you add more ratings to
+> `data/ground_truth_papers.csv` and as the current ranking pipeline evolves.
 
 ---
 
