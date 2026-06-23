@@ -94,7 +94,40 @@ your daily digests.
 - LLM returns a relevance score (1–10), a one-sentence reason, and keyword
   highlights
 - Final score: `0.6 × semantic_score + 0.4 × llm_score` (scaled to 0–100)
-
+Positive Rated Papers
+        │
+        ▼
+ ┌───────────────┐
+ │ MiniLM-L3-v2  │
+ └───────┬───────┘
+         ▼
+ Interest Profile
+         │
+         ▼
+ New ArXiv Papers
+         │
+         ▼
+ ┌─────────────────────────┐
+ │ Stage 1: Semantic Search│
+ │ Cosine Similarity       │
+ │ + Author Boost          │
+ └──────────┬──────────────┘
+            ▼
+      Top Candidates
+            │
+            ▼
+ ┌─────────────────────────┐
+ │ Stage 2: LLM Reranking  │
+ │ Relevance Score         │
+ │ Reason                  │
+ │ Keywords                │
+ └──────────┬──────────────┘
+            ▼
+   Weighted Score Fusion
+   (60% Semantic + 40% LLM)
+            │
+            ▼
+   Ranked Paper Recommendations
 ### Retrieval evaluation
 
 Research Radar evaluates ranking quality using held-out relevance from
